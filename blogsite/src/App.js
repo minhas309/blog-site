@@ -1,13 +1,17 @@
 import './App.css';
-import { Button } from '@mui/material';
+import { Box } from '@mui/material';
 import Bar from './components/topbar'
+import Editor from './pages/texteditor'
+
 function App() {
   return (
    <>
-    <Bar></Bar>
-   <Button variant='contained'>
-    Press me eh
-   </Button>
+    <Box sx={{
+      p:"20px",
+    }}>
+      <Bar />
+      <Editor />
+    </Box>
    </>
   );
 }
