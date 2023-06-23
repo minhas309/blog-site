@@ -1,18 +1,17 @@
 import './App.css';
-import { Box } from '@mui/material';
-import Bar from './components/topbar'
-import Editor from './pages/texteditor'
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import CreateBlog from './pages/temp';
+import TraPage from './pages/travellingpage'
+import ResponsiveAppBar from './components/topbar';
 function App() {
   return (
-   <>
-    <Box sx={{
-      p:"20px",
-    }}>
-      <Bar />
-      <Editor />
-    </Box>
-   </>
+        <BrowserRouter>
+        <ResponsiveAppBar/>
+          <Routes>
+          <Route path="/" element={<CreateBlog />} /> 
+          <Route path="/travelling" element={<TraPage />} />
+          </Routes>
+        </BrowserRouter>
   );
 }
 

@@ -11,14 +11,19 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate,useLocation } from "react-router-dom";
 
-const pages = ["Home", "Traveling", "Food", "Politics", "Weather", "Cars"];
+
+const pages = [{name:"Home",link:"/"}, {name:"Traveling",link:"/travelling"}
+// , "Food", "Politics", "Weather", "Cars"
+];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const navigate = useNavigate();  
+  const location = useLocation();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -32,6 +37,10 @@ function ResponsiveAppBar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const isPageActive = (link) => {
+    return location.pathname === link;
   };
 
   return (
@@ -76,9 +85,9 @@ function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" }
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map((page,index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -102,13 +111,14 @@ function ResponsiveAppBar() {
             V A L I D
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map((page,index) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+                key={index}
+                onClick={() => navigate(page.link)}
+                variant={isPageActive(page.link) ? "contained" : ""}
                 sx={{ my: 2, color: "black", display: "block" }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
